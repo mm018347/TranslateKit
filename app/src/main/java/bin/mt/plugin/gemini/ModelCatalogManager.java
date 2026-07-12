@@ -102,6 +102,13 @@ public class ModelCatalogManager {
         return out;
     }
 
+    /** Curated OpenRouter list — used when no cache or fetch fails. */
+    public static List<ModelInfo> getDefaultSeedOpenRouter() {
+        List<ModelInfo> out = new ArrayList<>(GeminiConstants.OPENROUTER_SEED.length);
+        for (String[] row : GeminiConstants.OPENROUTER_SEED) out.add(seedRow(row));
+        return out;
+    }
+
     /**
      * Merge live-fetched models on top of the seed. Live list always wins on
      * id collision. New models from the API appear; old/missing models
@@ -224,6 +231,7 @@ public class ModelCatalogManager {
                     case GEMINI: models = fetchGeminiModels(apiKey); break;
                     case OPENAI: models = fetchOpenAiModels(apiKey); break;
                     case CLAUDE: models = fetchClaudeModels(apiKey); break;
+                    case OPENROUTER: models = fetchOpenRouterModels(apiKey); break;
                     default: models = Collections.emptyList();
                 }
                 saveModelCache(prefs, cacheKey, models);
@@ -242,7 +250,7 @@ public class ModelCatalogManager {
     }
 
     /** Provider identifier for refresh operations. */
-    public enum Provider { GEMINI, OPENAI, CLAUDE }
+    public enum Provider { GEMINI, OPENAI, CLAUDE, OPENROUTER }
 
     /** Result of an auto-refresh attempt. */
     public interface RefreshCallback {
@@ -400,6 +408,41 @@ public class ModelCatalogManager {
                     JSONCompat.optString(entry, "display_name", "Anthropic Claude"),
                     isRecommendedClaudeModel(id),
                     priorityForClaude(id)
+            ));
+        }
+        sortModels(models);
+        return models;
+    }
+
+    public static List<ModelInfo> fetchOpenRouterModels(String apiKey) throws IOException {
+        if (TextUtils.isEmpty(apiKey)) {
+            throw new IOException("OpenRouter API key required to fetch models");
+        }
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer " + apiKey);
+        headers.put("HTTP-Referer", "https://github.com/ilker-binzet/TranslateKit");
+        headers.put("X-Title", "TranslateKit");
+        JSONObject response = HttpUtils.getJson("https://openrouter.ai/api/v1/models", headers);
+        JSONArray data = JSONCompat.optJSONArray(response, "data");
+        if (data == null) {
+            return Collections.emptyList();
+        }
+        List<ModelInfo> models = new ArrayList<>();
+        for (int i = 0; i < JSONCompat.size(data); i++) {
+            JSONObject entry = JSONCompat.optJSONObject(data, i);
+            if (entry == null) continue;
+            String id = JSONCompat.optString(entry, "id", "");
+            String name = JSONCompat.optString(entry, "name", id);
+            String desc = JSONCompat.optString(entry, "description", "OpenRouter Model");
+            if (desc.length() > 60) {
+                desc = desc.substring(0, 57) + "...";
+            }
+            models.add(new ModelInfo(
+                    id,
+                    name,
+                    desc,
+                    id.equals("google/gemini-2.5-flash"),
+                    id.contains("gemini-2.5-flash") ? 130 : (id.contains("free") ? 100 : 50)
             ));
         }
         sortModels(models);

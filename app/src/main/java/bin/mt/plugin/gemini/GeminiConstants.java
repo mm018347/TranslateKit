@@ -83,9 +83,15 @@ public class GeminiConstants {
     public static final String PREF_CLAUDE_MODEL = "claude_model_name";
     public static final String PREF_CLAUDE_ENDPOINT = "claude_api_endpoint";
 
+    // OpenRouter preference keys
+    public static final String PREF_OPENROUTER_API_KEY = "openrouter_api_key";
+    public static final String PREF_OPENROUTER_MODEL = "openrouter_model_name";
+    public static final String PREF_OPENROUTER_ENDPOINT = "openrouter_api_endpoint";
+
     // Cached model catalogs
     public static final String PREF_CACHE_OPENAI_MODELS = "cache_openai_models";
     public static final String PREF_CACHE_CLAUDE_MODELS = "cache_claude_models";
+    public static final String PREF_CACHE_OPENROUTER_MODELS = "cache_openrouter_models";
     public static final String PREF_CACHE_GEMINI_MODELS = "cache_gemini_models";
     public static final String PREF_DEBUG_DISABLE_MODEL_CACHE = "debug_disable_model_cache";
 
@@ -139,6 +145,10 @@ public class GeminiConstants {
     public static final String CLAUDE_MODEL_SONNET_4 = "claude-sonnet-4-latest";
     public static final String DEFAULT_CLAUDE_ENDPOINT = "https://api.anthropic.com/v1/messages";
 
+    // OpenRouter Models
+    public static final String DEFAULT_OPENROUTER_MODEL = "google/gemini-2.5-flash";
+    public static final String DEFAULT_OPENROUTER_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions";
+
     // ==================== Default Model Seeds ====================
     // Single source of truth for "what models do we know about as of v0.4.0".
     // Used when no cache is present (first install, offline) and as fallback
@@ -179,6 +189,13 @@ public class GeminiConstants {
             {CLAUDE_MODEL_OPUS_4,    "Claude Opus 4",         "Legacy",                  "false",  "80"},
     };
 
+    public static final String[][] OPENROUTER_SEED = {
+            {"google/gemini-2.5-flash", "Gemini 2.5 Flash", "Balanced, Recommended", "true", "130"},
+            {"google/gemini-2.5-pro",   "Gemini 2.5 Pro",   "Powerful Reasoning", "false", "110"},
+            {"meta-llama/llama-3.3-70b-instruct", "Llama 3.3 70B", "Meta Open Source", "false", "100"},
+            {"deepseek/deepseek-chat",  "DeepSeek V3",      "Efficient & Powerful", "false", "90"},
+    };
+
     /** Custom model override preference key suffix (per provider). */
     public static final String PREF_CUSTOM_MODEL = "_custom_model";
 
@@ -187,6 +204,7 @@ public class GeminiConstants {
     public static final String ENGINE_GEMINI = "gemini";
     public static final String ENGINE_OPENAI = "openai";
     public static final String ENGINE_CLAUDE = "claude";
+    public static final String ENGINE_OPENROUTER = "openrouter";
 
     // ==================== Rate Limits (Free Tier - Updated 2026)
     // ====================
@@ -219,6 +237,10 @@ public class GeminiConstants {
     public static final String URL_CLAUDE_PRICING = "https://www.anthropic.com/pricing";
     public static final String CLAUDE_MODELS_ENDPOINT = "https://api.anthropic.com/v1/models";
 
+    public static final String URL_OPENROUTER_KEYS = "https://openrouter.ai/keys";
+    public static final String URL_OPENROUTER_DOCS = "https://openrouter.ai/docs";
+    public static final String URL_OPENROUTER_PRICING = "https://openrouter.ai/models";
+
     // ==================== Plugin Metadata ====================
 
     public static final String PLUGIN_ID = "mt.plugin.translatekit";
@@ -234,6 +256,7 @@ public class GeminiConstants {
     public static final String API_KEY_PATTERN = "^AIzaSy[A-Za-z0-9_-]{33}$";
     public static final String OPENAI_API_KEY_PATTERN = "^sk-[A-Za-z0-9_-]{16,}$";
     public static final String CLAUDE_API_KEY_PATTERN = "^sk-ant-[A-Za-z0-9_-]{16,}$";
+    public static final String OPENROUTER_API_KEY_PATTERN = "^sk-or-v1-[A-Za-z0-9_-]{16,}$";
 
     // ==================== Developer Info ====================
 

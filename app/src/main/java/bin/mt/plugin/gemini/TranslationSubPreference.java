@@ -22,7 +22,8 @@ public class TranslationSubPreference implements PluginPreference {
                 .summary("Choose which AI provider to use by default")
                 .addItem("Gemini (Fast & Free)", GeminiConstants.ENGINE_GEMINI)
                 .addItem("OpenAI GPT (Powerful)", GeminiConstants.ENGINE_OPENAI)
-                .addItem("Claude (Balanced)", GeminiConstants.ENGINE_CLAUDE);
+                .addItem("Claude (Balanced)", GeminiConstants.ENGINE_CLAUDE)
+                .addItem("OpenRouter (Multi-model)", GeminiConstants.ENGINE_OPENROUTER);
 
         // ==================== Request Timeout ====================
         builder.addInput("Request Timeout (ms)", GeminiConstants.PREF_TIMEOUT)
@@ -68,6 +69,7 @@ public class TranslationSubPreference implements PluginPreference {
                 switch ((String) newValue) {
                     case GeminiConstants.ENGINE_OPENAI: engineName = "OpenAI GPT"; break;
                     case GeminiConstants.ENGINE_CLAUDE: engineName = "Claude"; break;
+                    case GeminiConstants.ENGINE_OPENROUTER: engineName = "OpenRouter"; break;
                     default: engineName = "Gemini"; break;
                 }
                 context.showToast("Default engine: " + engineName);

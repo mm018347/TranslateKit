@@ -33,6 +33,7 @@ public class GeminiTranslatePreference implements PluginPreference {
     private static final Pattern PATTERN_GEMINI_API_KEY = Pattern.compile(GeminiConstants.API_KEY_PATTERN);
     private static final Pattern PATTERN_OPENAI_API_KEY = Pattern.compile(GeminiConstants.OPENAI_API_KEY_PATTERN);
     private static final Pattern PATTERN_CLAUDE_API_KEY = Pattern.compile(GeminiConstants.CLAUDE_API_KEY_PATTERN);
+    private static final Pattern PATTERN_OPENROUTER_API_KEY = Pattern.compile(GeminiConstants.OPENROUTER_API_KEY_PATTERN);
 
     private static class ProviderStatus {
         final String displayName;
@@ -90,12 +91,13 @@ public class GeminiTranslatePreference implements PluginPreference {
         if (isKeyConfigured(GeminiConstants.PREF_API_KEY, PATTERN_GEMINI_API_KEY)) configured++;
         if (isKeyConfigured(GeminiConstants.PREF_OPENAI_API_KEY, PATTERN_OPENAI_API_KEY)) configured++;
         if (isKeyConfigured(GeminiConstants.PREF_CLAUDE_API_KEY, PATTERN_CLAUDE_API_KEY)) configured++;
+        if (isKeyConfigured(GeminiConstants.PREF_OPENROUTER_API_KEY, PATTERN_OPENROUTER_API_KEY)) configured++;
 
         String activeEngine = getActiveEngineName();
         if (configured == 0) {
             return "No providers configured \u2022 Tap to set up";
         }
-        return configured + "/3 configured \u2022 Active: " + activeEngine;
+        return configured + "/4 configured \u2022 Active: " + activeEngine;
     }
 
     private String buildTranslationSummary() {
@@ -121,11 +123,13 @@ public class GeminiTranslatePreference implements PluginPreference {
         ProviderStatus gemini = getProviderStatus("gemini");
         ProviderStatus openai = getProviderStatus("openai");
         ProviderStatus claude = getProviderStatus("claude");
+        ProviderStatus openrouter = getProviderStatus("openrouter");
 
         CharSequence[] labels = new CharSequence[]{
             gemini.icon + " " + gemini.displayName + "\n" + gemini.title + " \u2022 " + gemini.detail,
             openai.icon + " " + openai.displayName + "\n" + openai.title + " \u2022 " + openai.detail,
-            claude.icon + " " + claude.displayName + "\n" + claude.title + " \u2022 " + claude.detail
+            claude.icon + " " + claude.displayName + "\n" + claude.title + " \u2022 " + claude.detail,
+            openrouter.icon + " " + openrouter.displayName + "\n" + openrouter.title + " \u2022 " + openrouter.detail
         };
 
         pluginUI.buildDialog()
@@ -140,6 +144,9 @@ public class GeminiTranslatePreference implements PluginPreference {
                             break;
                         case 2:
                             context.openPreference(ClaudeProviderPreference.class);
+                            break;
+                        case 3:
+                            context.openPreference(OpenRouterProviderPreference.class);
                             break;
                     }
                     dialog.dismiss();
@@ -160,6 +167,7 @@ public class GeminiTranslatePreference implements PluginPreference {
         switch (engine) {
             case GeminiConstants.ENGINE_OPENAI: return "OpenAI";
             case GeminiConstants.ENGINE_CLAUDE: return "Claude";
+            case GeminiConstants.ENGINE_OPENROUTER: return "OpenRouter";
             default: return "Gemini";
         }
     }
@@ -195,6 +203,12 @@ public class GeminiTranslatePreference implements PluginPreference {
                 displayName = "Claude 3.5";
                 icon = "\uD83C\uDFAD";
                 break;
+            case "openrouter":
+                prefKey = GeminiConstants.PREF_OPENROUTER_API_KEY;
+                keyPattern = PATTERN_OPENROUTER_API_KEY;
+                displayName = "OpenRouter";
+                icon = "\uD83C\uDF10";
+                break;
             default:
                 break;
         }
@@ -228,6 +242,7 @@ public class GeminiTranslatePreference implements PluginPreference {
         if (GeminiConstants.PREF_API_KEY.equals(prefKey)) return "gemini";
         if (GeminiConstants.PREF_OPENAI_API_KEY.equals(prefKey)) return "openai";
         if (GeminiConstants.PREF_CLAUDE_API_KEY.equals(prefKey)) return "claude";
+        if (GeminiConstants.PREF_OPENROUTER_API_KEY.equals(prefKey)) return "openrouter";
         return null;
     }
 }

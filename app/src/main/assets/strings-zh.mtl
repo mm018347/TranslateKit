@@ -1,0 +1,389 @@
+# TranslateKit - Traditional Chinese Strings
+# 繁體中文語言文件。
+# 以 gc_ 開頭的鍵屬於 Google Cloud Translation 引擎。
+
+# Plugin Information
+plugin_name: TranslateKit
+plugin_description: 多提供商 AI 翻譯外掛，支援 Gemini、OpenAI 和 Claude（提供免費額度）
+
+# Preference Screen
+pref_header_quick_actions: ⚡ 快速操作 ⚡━━━━━━━━━━━━━━━━━━
+pref_action_test_provider: 🔍 測試當前服務商
+pref_action_test_provider_summary: 點擊對所選 AI 引擎進行快速狀態檢查
+pref_action_view_logs: 📘 查看外掛日誌
+pref_action_view_logs_summary: 打開 MT 管理器日誌檢視器，查看豐富彩色的偵錯日誌
+pref_quick_switch_engine: ⚡ 快速切換引擎
+pref_quick_switch_engine_summary: 點擊立即更改 AI 服務商
+pref_quick_select_model: 🚀 快速選擇模型
+pref_quick_select_model_summary: 快速存取 Gemini 模型選項
+pref_quick_toggle_debug: 🛠️ 切換偵錯模式
+pref_quick_toggle_debug_summary: 快速啟用/停用偵錯日誌
+
+pref_header_main: TranslateKit
+pref_plugin_name: 外掛名稱
+pref_plugin_description: 由 Gemini 3、GPT-5 和 Claude 4.5 驅動的多提供商翻譯
+pref_dashboard_card_title: 📊 快速儀表板
+pref_dashboard_card_summary: 點擊查看當前狀態和活動配置
+pref_active_provider_title: 🎯 當前服務商
+
+pref_header_api_config: 🔑 API 配置 🔐━━━━━━━━━━━━━━
+pref_api_key_title: Gemini API 金鑰
+pref_api_key_summary: 前往 aistudio.google.com/app/apikey 免費獲取金鑰
+pref_gemini_key_status_title: 📊 API 狀態
+pref_test_api_key: 🧪 測試 API 金鑰
+pref_test_api_key_summary: 驗證您的 API 金鑰是否正常工作
+pref_get_api_key: 🎁 獲取免費 API 金鑰
+pref_get_api_key_summary: 打開 Google AI Studio 創建免費的 API 金鑰
+pref_status_provider_gemini: 🌐 Gemini 金鑰
+pref_status_provider_openai: 🤖 OpenAI 金鑰
+pref_status_provider_claude: 🦾 Claude 金鑰
+pref_status_provider_openrouter: 🌐 OpenRouter 金鑰
+pref_status_missing: ❌ 未配置
+pref_status_invalid_format: ⚠️ 格式無效
+pref_status_ready: ✅ 準備就緒 (格式有效)
+
+pref_header_ai_engine: 🤖 預設 AI 引擎 ⚙️━━━━━━━━━━━━━━
+pref_default_ai_engine: 偏好的 AI 服務商
+pref_default_ai_engine_summary: 選擇翻譯引擎預設使用的服務商
+pref_ai_engine_gemini: 🌟 Gemini (免費、快速)
+pref_ai_engine_openai: 🤖 OpenAI (GPT-5 / o3 系列)
+pref_ai_engine_claude: 🧠 Claude (Anthropic 4.5)
+pref_ai_engine_openrouter: 🌐 OpenRouter (多模型)
+pref_ai_engine_tip: 💡 選擇引擎
+pref_ai_engine_tip_summary: 隨時切換服務商 — 每個 API 配置都是獨立保存的。
+
+pref_header_context: 📝 預翻譯上下文 📋━━━━━━━━━
+pref_context_description: 📦 持續上下文
+pref_context_description_summary: 提供應用程式中繼資料，使 AI 翻譯具備上下文感知。以下欄位將插入每次提示詞中。
+pref_context_app_name: 🎯 應用程式名稱
+pref_context_app_name_summary: 例如，"AnyAPK" 或您的專案代號
+pref_context_app_type: 🏷️ 應用程式類型/領域
+pref_context_app_type_summary: 例如，"APK 安裝工具" 或 "購物"
+pref_context_audience: 👥 目標受眾
+pref_context_audience_summary: 描述終端使用者（例如，"一般 Android 使用者"）
+pref_context_tone: 🎭 語氣與語調
+pref_context_tone_summary: 偏好的寫作語氣（清晰、俏皮、正式等）
+pref_context_notes: 📋 附加說明
+pref_context_notes_summary: 每次翻譯的額外說明或中繼資料
+pref_context_presets: 🎮 快速預設
+pref_context_presets_summary: 應用預先配置的上下文範本
+preset_mobile_app: 📱 行動應用程式
+preset_game: 🎮 遊戲
+preset_ebook: 📚 電子書
+preset_business: 💼 商務應用
+
+
+pref_header_debug: 🛠️ 偵錯與日誌 🔧━━━━━━━━━━━━━━━
+pref_enable_debug: 啟用偵錯日誌
+pref_enable_debug_summary: 將詳細的表情符號請求資訊記錄到 MT 管理器日誌中（正常使用時請停用）
+
+pref_header_more_ai: 🌐 更多 AI 服務商 🤖━━━━━━━━━━━━
+pref_openai_page_title: 🤖 OpenAI API 設定
+pref_openai_page_summary: 管理 OpenAI 金鑰、偏好模型和文件
+pref_openai_status_title: OpenAI API 狀態
+pref_claude_page_title: 🧠 Claude API 設定
+pref_claude_page_summary: 配置 Anthropic Claude 存取、限制和文件
+pref_claude_status_title: Claude API 狀態
+pref_openrouter_page_title: 🌐 OpenRouter API 設定
+pref_openrouter_page_summary: 管理 OpenRouter 金鑰、偏好模型和文件
+pref_openrouter_status_title: OpenRouter API 狀態
+
+pref_header_model: 🚀 模型選擇 ⭐━━━━━━━━━━━━━━━
+pref_model_name: Gemini 模型
+pref_model_summary: 選擇 AI 模型（推薦 Gemini 3 Flash）
+model_gemini3_flash: Gemini 3 Flash (最佳平衡) ⭐
+model_gemini3_pro: Gemini 3 Pro (最高品質)
+model_flash: Gemini 2.5 Flash (穩定備用)
+model_pro: Gemini 2.5 Pro (前代)
+model_legacy: Gemini 2.0 Flash (舊版)
+pref_rate_limits: 🎁 免費額度限制
+pref_rate_limits_summary: 每日 2000 次請求 (Flash) | 每日 100 次請求 (Pro) - 完全免費！
+
+pref_batch_enabled: 批次翻譯
+pref_batch_enabled_summary: 在單個 API 呼叫中發送多個文字以加快翻譯速度
+pref_batch_size: 批次大小
+pref_batch_size_summary: 每次批次請求的最大文字數量 (1-100)
+pref_batch_max_chars: 批次最大字數
+pref_batch_max_chars_summary: 每次批次請求的最大總字數 (500-50000)
+pref_bilingual_mode: 雙語輸出
+pref_bilingual_mode_summary: 保留原始文字並在下方顯示翻譯
+
+pref_header_performance: ⚡ 效能設定 💨━━━━━━━━━━━
+pref_timeout: 請求逾時 (ms)
+pref_timeout_summary: 等待 API 回應的最大時間 (5000-120000 毫秒)
+pref_max_retries: 最大重試次數
+pref_max_retries_summary: 失敗時的重試次數 (0-5)
+
+pref_header_info: ℹ️ 資訊與說明 📖━━━━━━━━━━━━
+pref_version: 🏷️ 外掛版本
+pref_free_tier: 🎁 免費額度限制
+pref_free_tier_summary: 30 次請求/分，2000 次請求/日，2M 代幣/日 (Gemini 3 Flash)
+pref_api_docs: 📖 API 文件
+pref_api_docs_summary: 查看 Gemini API 說明文件
+pref_pricing: 💵 價格資訊
+pref_pricing_summary: 查看免費額度限制和付費定價
+
+pref_header_developer: 👨‍💻 開發者 👨‍🔬━━━━━━━━━━━━━━━━━
+pref_developer_name: Ilker Binzet
+pref_developer_summary: AI 翻譯外掛的主開發者與維護者
+pref_developer_github: 🐙 GitHub 個人檔案
+pref_developer_github_summary: github.com/ilker-binzet
+pref_developer_linkedin: 🔗 LinkedIn 個人檔案
+pref_developer_linkedin_summary: linkedin.com/in/binzet-me
+
+# OpenAI Preference Page
+pref_openai_title: OpenAI API 配置
+pref_openai_subtitle: 將 GPT-5 和 o3 模型整合至 MT 管理器翻譯中
+pref_openai_header_overview: OpenAI 概述
+pref_openai_overview_title: 為什麼加入 OpenAI？
+pref_openai_overview_summary: 使用 GPT-5 和 o3 推理模型獲得卓越的翻譯品質。
+pref_openai_limits: 免費額度與使用
+pref_openai_limits_summary: 按需付費。在 OpenAI 控制台監控使用情況。
+pref_openai_header_api: API 存取
+pref_openai_api_key_title: OpenAI API 金鑰
+pref_openai_api_key_summary: 金鑰以 sk- 開頭，可在 platform.openai.com/api-keys 管理
+pref_openai_validate: 驗證金鑰格式
+pref_openai_validate_summary: 快速檢查儲存的金鑰是否符合 OpenAI 格式
+pref_openai_get_key: 創建 API 金鑰
+pref_openai_get_key_summary: 打開 OpenAI 控制台生成金鑰
+pref_openai_header_model: 模型與端點
+pref_openai_model_title: 預設 OpenAI 模型
+pref_openai_model_summary: 選擇後續翻譯使用的 GPT/o 系列模型
+pref_openai_model_gpt5mini: GPT-5 mini (最快 + 最便宜) ⭐
+pref_openai_model_gpt5: GPT-5 (旗艦模型)
+pref_openai_model_o3mini: o3-mini (快速推理)
+pref_openai_model_o3: o3 (深度推理)
+pref_openai_model_o4mini: o4-mini (視覺推理)
+pref_openai_model_gpt4o: GPT-4o (舊版備用)
+pref_openai_endpoint_title: 自訂端點
+pref_openai_endpoint_summary: 如果使用代理或 Azure OpenAI，請覆寫 OpenAI 端點
+pref_openai_header_docs: 文件與定價
+pref_openai_docs: OpenAI 文件
+pref_openai_docs_summary: 閱讀模型功能、限制和 API 參考資料
+pref_openai_pricing: OpenAI 定價
+pref_openai_pricing_summary: 在執行大批次任務前確認代幣成本
+
+# Claude Preference Page
+pref_claude_title: Claude API 配置
+pref_claude_subtitle: 使用 Anthropic Claude 4.5 模型進行翻譯
+pref_claude_header_overview: Claude 概述
+pref_claude_overview_title: 為什麼加入 Claude？
+pref_claude_overview_summary: Claude 4.5 模型提供卓越的推理、編碼和上下文處理能力。
+pref_claude_limits: 免費額度與使用
+pref_claude_limits_summary: 按需付費，預設限制為：50 req/min, 50K input tokens/min, 10K output tokens/min。
+pref_claude_header_api: API 存取
+pref_claude_api_key_title: Claude API 金鑰
+pref_claude_api_key_summary: 金鑰以 sk-ant- 開頭，在 console.anthropic.com 管理
+pref_claude_validate: 驗證金鑰格式
+pref_claude_validate_summary: 檢查儲存的金鑰是否符合 Anthropic 格式規則
+pref_claude_get_key: 創建 API 金鑰
+pref_claude_get_key_summary: 打開 Anthropic 控制台生成金鑰
+pref_claude_header_model: 模型與端點
+pref_claude_model_title: 預設 Claude 模型
+pref_claude_model_summary: 選擇預設呼叫的 Claude 模型
+pref_claude_model_sonnet45: Claude 4.5 Sonnet (最佳平衡) ⭐
+pref_claude_model_opus45: Claude 4.5 Opus (最高品質)
+pref_claude_model_haiku45: Claude 4.5 Haiku (快速且實惠)
+pref_claude_model_sonnet4: Claude 4 Sonnet (穩定備用)
+pref_claude_model_opus4: Claude 4 Opus (前代)
+pref_claude_model_fallback_note: 提示：如果所選模型在您的工作區中不可用，外掛將自動查詢 Anthropic 可用的模型並切換至首個可行選項。
+pref_claude_endpoint_title: 自訂端點
+pref_claude_endpoint_summary: 針對閘道或區域代理覆寫 Anthropic 基礎 URL
+pref_claude_header_docs: 文件與定價
+pref_claude_docs: Claude 文件
+pref_claude_docs_summary: 瞭解 Claude API 使用方法和安全指南
+pref_claude_pricing: Claude 定價
+pref_claude_pricing_summary: 在發送高吞吐量任務前確認代幣成本
+
+# OpenRouter Preference Page
+pref_openrouter_title: OpenRouter API 配置
+pref_openrouter_subtitle: 使用 OpenRouter 多模型聚合服務進行翻譯
+pref_openrouter_header_overview: OpenRouter 概述
+pref_openrouter_overview_title: 為什麼加入 OpenRouter？
+pref_openrouter_overview_summary: OpenRouter 匯集了包含 Gemini、GPT-5、Claude 在內的多家服務商，提供單一介面存取。
+pref_openrouter_limits: 免費額度與使用
+pref_openrouter_limits_summary: 按需付費。支援許多免費的模型，可在 OpenRouter 控制台監控使用情況。
+pref_openrouter_header_api: API 存取
+pref_openrouter_api_key_title: OpenRouter API 金鑰
+pref_openrouter_api_key_summary: 金鑰以 sk-or-v1- 開頭，可在 openrouter.ai/keys 管理
+pref_openrouter_validate: 驗證金鑰格式
+pref_openrouter_validate_summary: 檢查儲存的金鑰是否符合 OpenRouter 格式規則
+pref_openrouter_get_key: 創建 API 金鑰
+pref_openrouter_get_key_summary: 打開 OpenRouter 頁面生成金鑰
+pref_openrouter_header_model: 模型與端點
+pref_openrouter_model_title: 預設 OpenRouter 模型
+pref_openrouter_model_summary: 選擇預設使用的模型
+pref_openrouter_endpoint_title: 自訂端點
+pref_openrouter_endpoint_summary: 覆寫 OpenRouter 的 API 基礎 URL
+pref_openrouter_header_docs: 文件與定價
+pref_openrouter_docs: OpenRouter 文件
+pref_openrouter_docs_summary: 瞭解 OpenRouter API 存取和整合指南
+pref_openrouter_pricing: OpenRouter 價格
+pref_openrouter_pricing_summary: 查看各家模型的最新費率
+
+# Language Names
+lang_auto: 自動檢測
+lang_en: 英文
+lang_tr: 土耳其文
+lang_de: 德文
+lang_fr: 法文
+lang_es: 西班牙文
+lang_it: 義大利文
+lang_pt: 葡萄牙文
+lang_ru: 俄文
+lang_ja: 日文
+lang_ko: 韓文
+lang_zh-CN: 簡體中文
+lang_zh-TW: 繁體中文
+lang_ar: 阿拉伯文
+lang_hi: 印地文
+lang_nl: 荷蘭文
+lang_sv: 瑞典文
+lang_pl: 波蘭文
+lang_uk: 烏克蘭文
+lang_cs: 捷克文
+lang_el: 希臘文
+lang_he: 希伯來文
+lang_id: 印尼文
+lang_th: 泰文
+lang_vi: 越南文
+lang_ro: 羅馬尼亞文
+lang_hu: 匈牙利文
+lang_da: 丹麥文
+lang_fi: 芬蘭文
+lang_no: 挪威文
+lang_bg: 保加利亞文
+lang_hr: 克羅埃西亞文
+lang_sr: 塞爾維亞文
+lang_sk: 斯洛伐克文
+lang_sl: 斯洛維尼亞文
+lang_lt: 立陶宛文
+lang_lv: 拉脫維亞文
+lang_et: 愛沙尼亞文
+
+# Error Messages
+error_no_api_key: API 金鑰未配置。請在 aistudio.google.com/app/apikey 獲取免費金鑰
+error_invalid_api_key_format: API 金鑰格式無效。應以 "AIzaSy" 開頭且長度為 39 個字元。
+error_api_key_invalid: API 金鑰驗證失敗。請檢查您的金鑰。
+error_api_test_failed: API 金鑰測試失敗
+error_api: API 錯誤
+error_timeout_range: 逾時時間必須在 5000 到 120000 毫秒之間
+error_retries_range: 重試次數必須在 0 到 5 之間
+error_invalid_number: 請輸入有效的數字
+error_openai_no_api_key: 缺少 OpenAI API 金鑰。請在 platform.openai.com/api-keys 創建
+error_openai_invalid_key_format: OpenAI 金鑰格式無效。金鑰應以 "sk-" 開頭，且僅包含字母和數字。
+error_claude_no_api_key: 缺少 Claude API 金鑰。請在 console.anthropic.com 創建
+error_claude_invalid_key_format: Claude 金鑰格式無效。金鑰應以 "sk-ant-" 開頭。
+error_openrouter_no_api_key: 缺少 OpenRouter API 金鑰。請在 openrouter.ai/keys 創建
+error_openrouter_invalid_key_format: OpenRouter 金鑰格式無效。金鑰應以 "sk-or-v1-" 開頭。
+
+# Success Messages
+msg_api_key_valid: ✅ API 金鑰有效！Gemini AI 已準備好進行翻譯。
+msg_openai_key_valid_format: ✅ OpenAI 金鑰格式有效。您已可以開始測試請求。
+msg_claude_key_valid_format: ✅ Claude 金鑰格式有效，已準備好使用。
+msg_openrouter_key_valid_format: ✅ OpenRouter 金鑰格式有效，已準備好使用。
+msg_fallback_gemini: ⚠️ 正在退回使用 Gemini AI (預設服務商)。
+msg_claude_model_auto_selected: ⚠️ 您所選的 Claude 模型對此帳戶不可用。已切換至：
+
+# Dialog Buttons
+close: 關閉
+
+# Text Editor Floating Menu & Tool Menu
+floating_menu_translate: AI 翻譯
+tool_menu_ai_translate: AI 翻譯
+source_text: 原文
+translated_text: 譯文
+from: 來源語：
+to: 目標語：
+engine: 引擎：
+translate: 翻譯
+replace_original: 替換原文
+text_replaced: 文字已替換
+translating: 正在翻譯
+translating_with: 正在使用翻譯
+translation_complete: 翻譯完成
+error_no_text_selected: 未選擇任何文字
+error_no_text: 請輸入要翻譯的文字
+error_translation_failed: 翻譯失敗
+
+# ==================== Google Cloud Translation (gc_) ====================
+gc_plugin_name: Google Cloud 翻譯
+gc_plugin_description: 採用 Google Cloud Translation API 技術的專業翻譯引擎
+
+gc_pref_header_main: Google Cloud 翻譯
+gc_pref_plugin_name: 外掛名稱
+gc_pref_plugin_description: 採用 Google 神經機器翻譯技術的高階翻譯
+
+gc_pref_header_api_config: API 配置
+gc_pref_api_key_title: API 金鑰
+gc_pref_api_key_summary: 輸入您的 Google Cloud Translation API 金鑰。\n可在 console.cloud.google.com 獲取
+gc_pref_test_api_key: 測試 API 金鑰
+gc_pref_test_api_key_summary: 驗證您的 API 金鑰是否正常工作
+gc_pref_get_api_key: 獲取 API 金鑰
+gc_pref_get_api_key_summary: 打開 Google Cloud 控制台創建 API 金鑰
+
+gc_pref_header_translation_settings: 翻譯設定
+gc_pref_default_target_lang: 預設目標語言
+gc_pref_default_target_lang_summary: 偏好的翻譯目標語言
+gc_pref_use_advanced_model: 使用高級 NMT 模型
+gc_pref_use_advanced_model_summary: 啟用 Google 高級神經機器翻譯模型（可能產生更高費用）
+
+gc_pref_header_performance: 效能設定
+gc_pref_timeout: 請求逾時 (ms)
+gc_pref_timeout_summary: 等待 API 回應的最大時間 (5000-120000 毫秒)
+gc_pref_max_retries: 最大重試次數
+gc_pref_max_retries_summary: 發生暫時性失敗時的重试次數 (0-5)
+
+gc_pref_header_advanced: 進階功能
+gc_pref_enable_cache: 啟用翻譯快取
+gc_pref_enable_cache_summary: 快取已翻譯的文本以減少 API 呼叫並提高速度
+gc_pref_cache_expiration: 快取過期時間 (分鐘)
+gc_pref_cache_expiration_summary: 翻譯在快取中保留的時間
+gc_pref_clear_cache: 清除快取
+gc_pref_clear_cache_summary: 刪除所有快取的翻譯
+
+gc_pref_header_statistics: 統計資料
+gc_pref_stats_cache_hits: 快取命中次數
+gc_pref_stats_cache_misses: 快取未命中次數
+gc_pref_stats_value: %d 次
+gc_pref_reset_stats: 重置統計資料
+gc_pref_reset_stats_summary: 清除所有使用統計資料
+
+gc_pref_header_info: 資訊與說明
+gc_pref_version: 外掛版本
+gc_pref_api_docs: API 文件
+gc_pref_api_docs_summary: 查看 Google Cloud Translation API 說明文件
+gc_pref_pricing: 價格資訊
+gc_pref_pricing_summary: 查看翻譯成本和免費額度限制
+gc_pref_github: GitHub 儲存庫
+gc_pref_github_summary: 查看原始碼並報告問題
+
+gc_lang_auto: 自動檢測
+gc_lang_en: 英文
+gc_lang_zh-CN: 簡體中文
+gc_lang_zh-TW: 繁體中文
+gc_lang_tr: 土耳其文
+gc_lang_de: 德文
+gc_lang_fr: 法文
+gc_lang_es: 西班牙文
+gc_lang_ja: 日文
+gc_lang_ko: 韓文
+
+gc_error_no_api_key: API 金鑰未配置。請在設定中輸入您的 API 金鑰。
+gc_error_invalid_api_key_format: API 金鑰格式無效。Google API 金鑰應以 "AIzaSy" 開頭且長度為 39 個字元。
+gc_error_api_key_invalid: API 金鑰驗證失敗。請檢查您的金鑰並重試。
+gc_error_api_test_failed: API 金鑰測試失敗
+gc_error_text_too_long: 文本超過 5000 字元限制。請拆分為較小的區塊。
+gc_error_api: API 錯誤
+gc_error_timeout_range: 逾時時間必須在 5000 到 120000 毫秒之間
+gc_error_retries_range: 重試次數必須在 0 到 5 之間
+gc_error_invalid_number: 請輸入有效的數字
+
+gc_msg_api_key_valid: API 金鑰有效且工作正常！
+gc_msg_cache_cleared: 翻譯快取已清除
+gc_msg_stats_reset: 統計資料已重置
+
+gc_status_translating: 正在翻譯...
+gc_status_retrying: 正在重試翻譯（嘗試第 %d 次）...
+gc_status_cached: 使用快取的翻譯
+gc_status_complete: 翻譯完成

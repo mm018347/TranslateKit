@@ -87,6 +87,11 @@ public class GeminiTranslationEngine extends BaseBatchTranslationEngine {
     private String claudeModel;
     private String claudeEndpoint;
 
+    // OpenRouter configuration
+    private String openRouterApiKey;
+    private String openRouterModel;
+    private String openRouterEndpoint;
+
     private boolean debugLogging;
     private SharedPreferences preferences;
     private String userContextDirective = "";
@@ -216,6 +221,19 @@ public class GeminiTranslationEngine extends BaseBatchTranslationEngine {
                     logInfo("Using Claude engine (model=" + claudeModel + ")");
                 }
                 break;
+            case GeminiConstants.ENGINE_OPENROUTER:
+                openRouterApiKey = trimKey(prefs.getString(GeminiConstants.PREF_OPENROUTER_API_KEY, ""));
+                openRouterModel = ProviderCatalogRefresher.resolveSelectedModel(
+                        prefs, GeminiConstants.PREF_OPENROUTER_MODEL, GeminiConstants.DEFAULT_OPENROUTER_MODEL);
+                openRouterEndpoint = prefs.getString(GeminiConstants.PREF_OPENROUTER_ENDPOINT, GeminiConstants.DEFAULT_OPENROUTER_ENDPOINT);
+                if (isNullOrEmpty(openRouterApiKey)) {
+                    notifyAndFallbackToGemini(prefs, "error_openrouter_no_api_key");
+                } else if (!java.util.regex.Pattern.matches(GeminiConstants.OPENROUTER_API_KEY_PATTERN, openRouterApiKey)) {
+                    logWarn("OpenRouter API key format appears invalid (expected: sk-or-v1-...)");
+                } else {
+                    logInfo("Using OpenRouter engine (model=" + openRouterModel + ")");
+                }
+                break;
             case GeminiConstants.ENGINE_GEMINI:
             default:
                 selectedEngine = GeminiConstants.ENGINE_GEMINI;
@@ -309,6 +327,9 @@ public class GeminiTranslationEngine extends BaseBatchTranslationEngine {
                 break;
             case GeminiConstants.ENGINE_CLAUDE:
                 result = translateWithClaudeWithFallback(prompt, sourceLanguage, targetLanguage, inputChars, preview);
+                break;
+            case GeminiConstants.ENGINE_OPENROUTER:
+                result = translateWithOpenRouter(prompt, sourceLanguage, targetLanguage, inputChars, preview);
                 break;
             case GeminiConstants.ENGINE_GEMINI:
             default:
@@ -411,6 +432,9 @@ public class GeminiTranslationEngine extends BaseBatchTranslationEngine {
                     break;
                 case GeminiConstants.ENGINE_CLAUDE:
                     rawResponse = translateWithClaudeWithFallback(prompt, sourceLanguage, targetLanguage, totalChars, preview);
+                    break;
+                case GeminiConstants.ENGINE_OPENROUTER:
+                    rawResponse = translateWithOpenRouter(prompt, sourceLanguage, targetLanguage, totalChars, preview);
                     break;
                 case GeminiConstants.ENGINE_GEMINI:
                 default:
@@ -844,6 +868,47 @@ public class GeminiTranslationEngine extends BaseBatchTranslationEngine {
                 }
                 throw e;
             }
+        }
+    }
+
+    private String translateWithOpenRouter(String prompt,
+                                           String sourceLanguage,
+                                           String targetLanguage,
+                                           int inputChars,
+                                           String preview) throws IOException {
+        return executeWithRetry("openrouter", openRouterModel, sourceLanguage, targetLanguage, inputChars, preview, () -> {
+            JSONObject request = buildOpenRouterRequest(prompt, sourceLanguage, targetLanguage);
+
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Authorization", "Bearer " + openRouterApiKey);
+            headers.put("HTTP-Referer", "https://github.com/ilker-binzet/TranslateKit");
+            headers.put("X-Title", "TranslateKit");
+            JSONObject response = HttpUtils.postJson(openRouterEndpoint, headers, request.toString(), requestTimeout);
+            String translation = parseOpenAiResponse(response);
+            logSuccess("OpenRouter response parsed, chars=" + translation.length());
+            return translation;
+        });
+    }
+
+    private JSONObject buildOpenRouterRequest(String prompt, String sourceLanguage, String targetLanguage) throws IOException {
+        try {
+            JSONObject request = new JSONObject();
+            request.put("model", openRouterModel);
+
+            JSONArray messages = new JSONArray();
+            messages.add(new JSONObject()
+                    .put("role", "system")
+                    .put("content", buildSystemPrompt(sourceLanguage, targetLanguage)));
+            messages.add(new JSONObject()
+                    .put("role", "user")
+                    .put("content", prompt));
+            request.put("messages", messages);
+            request.put("temperature", 0.1);
+            request.put("max_tokens", clampTokens(prompt.length() / 2, 2048, 8192));
+
+            return request;
+        } catch (Exception e) {
+            throw new IOException("Failed to build OpenRouter request: " + e.getMessage(), e);
         }
     }
 
