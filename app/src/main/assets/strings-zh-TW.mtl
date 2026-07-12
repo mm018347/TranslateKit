@@ -4,7 +4,7 @@
 
 # Plugin Information
 plugin_name: TranslateKit
-plugin_description: 多提供商 AI 翻譯外掛，支援 Gemini、OpenAI 和 Claude（提供免費額度）
+plugin_description: 多提供商 AI 翻譯外掛，支援 Gemini、OpenAI、Claude 和 OpenRouter（提供免費額度）
 
 # Preference Screen
 pref_header_quick_actions: ⚡ 快速操作 ⚡━━━━━━━━━━━━━━━━━━

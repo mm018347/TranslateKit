@@ -11,7 +11,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Java](https://img.shields.io/badge/Java-17-orange?style=flat-square)](#)
 
-*Translate Android string resources using Gemini, OpenAI, or Claude — all from a single plugin.*
+*Translate Android string resources using Gemini, OpenAI, Claude, or OpenRouter — all from a single plugin.*
 
 </div>
 
