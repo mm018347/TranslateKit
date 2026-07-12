@@ -10,8 +10,8 @@ import bin.mt.plugin.api.PluginContext;
 import bin.mt.plugin.api.preference.PluginPreference;
 
 /**
- * OpenAI GPT Provider Settings
- * Dedicated settings page for OpenAI GPT configuration
+ * OpenRouter Provider Settings
+ * Dedicated settings page for OpenRouter configuration
  *
  * @author Ilker Binzet
  * @version 0.4.0-beta - Auto-refreshing model catalog + custom model override
