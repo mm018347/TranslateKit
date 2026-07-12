@@ -118,6 +118,8 @@ public class AITranslateFloatingMenu extends BaseTextEditorFloatingMenu {
                 return "OpenAI";
             case GeminiConstants.ENGINE_CLAUDE:
                 return "Claude";
+            case GeminiConstants.ENGINE_OPENROUTER:
+                return "OpenRouter";
             default:
                 return "AI";
         }
@@ -134,6 +136,8 @@ public class AITranslateFloatingMenu extends BaseTextEditorFloatingMenu {
                 return translateWithOpenAI(prompt, sourceLang, targetLang, prefs, timeout);
             case GeminiConstants.ENGINE_CLAUDE:
                 return translateWithClaude(prompt, sourceLang, targetLang, prefs, timeout);
+            case GeminiConstants.ENGINE_OPENROUTER:
+                return translateWithOpenRouter(prompt, sourceLang, targetLang, prefs, timeout);
             case GeminiConstants.ENGINE_GEMINI:
             default:
                 return translateWithGemini(prompt, prefs, timeout);
@@ -261,6 +265,41 @@ public class AITranslateFloatingMenu extends BaseTextEditorFloatingMenu {
         headers.put("anthropic-version", GeminiConstants.CLAUDE_API_VERSION);
         bin.mt.json.JSONObject response = bin.mt.plugin.common.HttpUtils.postJson(endpoint, headers, request.toString());
         return parseClaudeResponse(response);
+    }
+
+    private String translateWithOpenRouter(String prompt, String sourceLang, String targetLang,
+                                           SharedPreferences prefs, int timeout) throws IOException {
+        String apiKey = prefs.getString(GeminiConstants.PREF_OPENROUTER_API_KEY, "");
+        String model = prefs.getString(GeminiConstants.PREF_OPENROUTER_MODEL, GeminiConstants.DEFAULT_OPENROUTER_MODEL);
+        String endpoint = prefs.getString(GeminiConstants.PREF_OPENROUTER_ENDPOINT, GeminiConstants.DEFAULT_OPENROUTER_ENDPOINT);
+
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IOException("OpenRouter API key not configured");
+        }
+
+        bin.mt.json.JSONObject request = new bin.mt.json.JSONObject();
+        try {
+            request.put("model", model);
+            bin.mt.json.JSONArray messages = new bin.mt.json.JSONArray();
+            messages.add(new bin.mt.json.JSONObject()
+                    .put("role", "system")
+                    .put("content", "You are a professional translator. Translate text accurately and return only the translation."));
+            messages.add(new bin.mt.json.JSONObject()
+                    .put("role", "user")
+                    .put("content", prompt));
+            request.put("messages", messages);
+            request.put("temperature", 0.1);
+            request.put("max_tokens", 2048);
+        } catch (Exception e) {
+            throw new IOException("Failed to build request", e);
+        }
+
+        java.util.Map<String, String> headers = new java.util.HashMap<>();
+        headers.put("Authorization", "Bearer " + apiKey);
+        headers.put("HTTP-Referer", "https://github.com/ilker-binzet/TranslateKit");
+        headers.put("X-Title", "TranslateKit");
+        bin.mt.json.JSONObject response = bin.mt.plugin.common.HttpUtils.postJson(endpoint, headers, request.toString());
+        return parseOpenAIResponse(response);
     }
 
     private String parseGeminiResponse(bin.mt.json.JSONObject json) throws IOException {

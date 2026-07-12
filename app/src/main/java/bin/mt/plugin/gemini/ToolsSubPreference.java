@@ -33,6 +33,7 @@ public class ToolsSubPreference implements PluginPreference {
     private static final Pattern PATTERN_GEMINI_API_KEY = Pattern.compile(GeminiConstants.API_KEY_PATTERN);
     private static final Pattern PATTERN_OPENAI_API_KEY = Pattern.compile(GeminiConstants.OPENAI_API_KEY_PATTERN);
     private static final Pattern PATTERN_CLAUDE_API_KEY = Pattern.compile(GeminiConstants.CLAUDE_API_KEY_PATTERN);
+    private static final Pattern PATTERN_OPENROUTER_API_KEY = Pattern.compile(GeminiConstants.OPENROUTER_API_KEY_PATTERN);
 
     private static final int DEBUG_TAP_THRESHOLD = 5;
     private static final long DEBUG_TAP_RESET_MS = 1500L;
@@ -142,7 +143,9 @@ public class ToolsSubPreference implements PluginPreference {
             GeminiConstants.PREF_OPENAI_MODEL,
             GeminiConstants.PREF_OPENAI_ENDPOINT,
             GeminiConstants.PREF_CLAUDE_MODEL,
-            GeminiConstants.PREF_CLAUDE_ENDPOINT
+            GeminiConstants.PREF_CLAUDE_ENDPOINT,
+            GeminiConstants.PREF_OPENROUTER_MODEL,
+            GeminiConstants.PREF_OPENROUTER_ENDPOINT
     ));
 
     /** Keys stored as boolean (all others are treated as String). */
@@ -275,6 +278,7 @@ public class ToolsSubPreference implements PluginPreference {
         ProviderStatus geminiStatus = getProviderStatus("gemini");
         ProviderStatus openaiStatus = getProviderStatus("openai");
         ProviderStatus claudeStatus = getProviderStatus("claude");
+        ProviderStatus openrouterStatus = getProviderStatus("openrouter");
         ProviderStatus activeStatus = getActiveProviderStatus();
         String activeModel = getActiveModelName();
 
@@ -319,7 +323,7 @@ public class ToolsSubPreference implements PluginPreference {
                             .addTextView().text(openaiStatus.detail).paddingTopDp(2).textColor(secondaryTextColor)
                         )
                     )
-                .addHorizontalLayout().paddingDp(12)
+                .addHorizontalLayout().paddingDp(12).marginBottomDp(8)
                     .backgroundColor(cardBackground)
                     .children(row -> row
                         .addTextView().text(claudeStatus.icon).textSize(28).paddingRightDp(12)
@@ -327,6 +331,16 @@ public class ToolsSubPreference implements PluginPreference {
                             .addTextView().text(claudeStatus.displayName).bold().textColor(claudeStatus.getAccentColor(pluginUI))
                             .addTextView().text(claudeStatus.title).paddingTopDp(2).textColor(primaryTextColor)
                             .addTextView().text(claudeStatus.detail).paddingTopDp(2).textColor(secondaryTextColor)
+                        )
+                    )
+                .addHorizontalLayout().paddingDp(12)
+                    .backgroundColor(cardBackground)
+                    .children(row -> row
+                        .addTextView().text(openrouterStatus.icon).textSize(28).paddingRightDp(12)
+                        .addVerticalLayout().children(col -> col
+                            .addTextView().text(openrouterStatus.displayName).bold().textColor(openrouterStatus.getAccentColor(pluginUI))
+                            .addTextView().text(openrouterStatus.title).paddingTopDp(2).textColor(primaryTextColor)
+                            .addTextView().text(openrouterStatus.detail).paddingTopDp(2).textColor(secondaryTextColor)
                         )
                     )
             )
@@ -354,6 +368,9 @@ public class ToolsSubPreference implements PluginPreference {
         } else if (GeminiConstants.ENGINE_CLAUDE.equals(engine)) {
             key = preferences.getString(GeminiConstants.PREF_CLAUDE_API_KEY, "");
             keyPattern = PATTERN_CLAUDE_API_KEY;
+        } else if (GeminiConstants.ENGINE_OPENROUTER.equals(engine)) {
+            key = preferences.getString(GeminiConstants.PREF_OPENROUTER_API_KEY, "");
+            keyPattern = PATTERN_OPENROUTER_API_KEY;
         } else {
             key = preferences.getString(GeminiConstants.PREF_API_KEY, "");
             keyPattern = PATTERN_GEMINI_API_KEY;
@@ -372,6 +389,8 @@ public class ToolsSubPreference implements PluginPreference {
             formatHint = "Expected format: sk-...";
         } else if (GeminiConstants.ENGINE_CLAUDE.equals(engine)) {
             formatHint = "Expected format: sk-ant-...";
+        } else if (GeminiConstants.ENGINE_OPENROUTER.equals(engine)) {
+            formatHint = "Expected format: sk-or-v1-...";
         } else {
             formatHint = "Expected format: AIzaSy...";
         }
@@ -447,6 +466,8 @@ public class ToolsSubPreference implements PluginPreference {
                 ModelCatalogManager.inspectCache(preferences, GeminiConstants.PREF_CACHE_OPENAI_MODELS);
         ModelCatalogManager.CacheDiagnostics claudeDiagnostics =
                 ModelCatalogManager.inspectCache(preferences, GeminiConstants.PREF_CACHE_CLAUDE_MODELS);
+        ModelCatalogManager.CacheDiagnostics openrouterDiagnostics =
+                ModelCatalogManager.inspectCache(preferences, GeminiConstants.PREF_CACHE_OPENROUTER_MODELS);
 
         int primaryTextColor = GeminiColorTokens.getPrimaryTextColor(pluginUI);
         int secondaryTextColor = GeminiColorTokens.getSecondaryTextColor(pluginUI);
@@ -473,6 +494,10 @@ public class ToolsSubPreference implements PluginPreference {
                 .addVerticalLayout().paddingDp(12).marginBottomDp(10).backgroundColor(cardColor).children(section -> section
                     .addTextView().text("Claude Catalog").bold().textColor(GeminiColorTokens.getProviderBrandColor(pluginUI, "claude"))
                     .addTextView().text(formatCacheDiagnostics(claudeDiagnostics)).paddingTopDp(4).textColor(secondaryTextColor)
+                )
+                .addVerticalLayout().paddingDp(12).marginBottomDp(10).backgroundColor(cardColor).children(section -> section
+                    .addTextView().text("OpenRouter Catalog").bold().textColor(GeminiColorTokens.getProviderBrandColor(pluginUI, "openrouter"))
+                    .addTextView().text(formatCacheDiagnostics(openrouterDiagnostics)).paddingTopDp(4).textColor(secondaryTextColor)
                 )
             )
             .addTextView().text("Cache Controls").bold().textSize(16).paddingTopDp(8).textColor(primaryTextColor)
@@ -509,6 +534,7 @@ public class ToolsSubPreference implements PluginPreference {
         switch (engine) {
             case GeminiConstants.ENGINE_OPENAI: return "OpenAI GPT";
             case GeminiConstants.ENGINE_CLAUDE: return "Claude AI";
+            case GeminiConstants.ENGINE_OPENROUTER: return "OpenRouter";
             default: return "Gemini AI";
         }
     }
@@ -534,6 +560,7 @@ public class ToolsSubPreference implements PluginPreference {
         switch (engine) {
             case GeminiConstants.ENGINE_OPENAI: return getProviderStatus("openai");
             case GeminiConstants.ENGINE_CLAUDE: return getProviderStatus("claude");
+            case GeminiConstants.ENGINE_OPENROUTER: return getProviderStatus("openrouter");
             default: return getProviderStatus("gemini");
         }
     }
@@ -556,6 +583,12 @@ public class ToolsSubPreference implements PluginPreference {
                 keyPattern = PATTERN_CLAUDE_API_KEY;
                 displayName = "Claude AI";
                 icon = "🎭";
+                break;
+            case "openrouter":
+                prefKey = GeminiConstants.PREF_OPENROUTER_API_KEY;
+                keyPattern = PATTERN_OPENROUTER_API_KEY;
+                displayName = "OpenRouter";
+                icon = "🌐";
                 break;
             default:
                 break;
@@ -648,5 +681,6 @@ public class ToolsSubPreference implements PluginPreference {
         ModelCatalogManager.clearModelCache(preferences, GeminiConstants.PREF_CACHE_GEMINI_MODELS);
         ModelCatalogManager.clearModelCache(preferences, GeminiConstants.PREF_CACHE_OPENAI_MODELS);
         ModelCatalogManager.clearModelCache(preferences, GeminiConstants.PREF_CACHE_CLAUDE_MODELS);
+        ModelCatalogManager.clearModelCache(preferences, GeminiConstants.PREF_CACHE_OPENROUTER_MODELS);
     }
 }
